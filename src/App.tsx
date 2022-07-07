@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from 'react';
+import HeaderWithColor from './components/HeaderWithColor';
+import { collectionOfColors } from './constants/collectionOfColors';
 
-function App() {
+// the responsibility of App component is to draw another component, no side logic with set-stating, it was an old way to create apps, modern web apps are using instruments like Redux to store the state into a separate file and provide it for root index.tsx
+
+// so, it's just an example
+
+const App = () => {
+  const [requiredColor, setRequiredColor] = useState('');
+
+  useEffect(() => {
+    const color = collectionOfColors[Math.floor(Math.random() * 15)];
+
+    setRequiredColor(color);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <HeaderWithColor color={requiredColor || 'blue'} />
+    </>
   );
-}
+};
+
+/** 
+ * the correct structure
+ * no any logic instead of visual
+ * the props drilling is ALLOWED, but do we really need it?
+const App = ({someProp}: TSomeProps) => {
+  return (
+    <>
+      <HeaderWithColor color={someProp} />
+    </>
+  );
+};
+ */
 
 export default App;
+
