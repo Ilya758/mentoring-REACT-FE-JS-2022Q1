@@ -18,7 +18,7 @@ const UseStateApp = ({ name, age }: { name?: string; age?: number }) => {
   const [count, setCount] = useState<number>(() => 0); // add. method
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setCount(prevState => prevState + 1);
+    setCount(prevState => prevState + 1); // more preferrable, because read the actual state
     // setCount(count + 1);
   };
 
